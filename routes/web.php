@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['admin']], function () {
-    Route::get('/dashboard','DashboardController@index')->name('dashboard');
+    Route::get('dashboard','DashboardController@index')->name('dashboard');
     Route::get('logout','OtentikasiController@logout')->name('get.logout');
+    Route::get('warga','WargaController@index')->name('warga');
+    Route::get('warga/tambah-warga','WargaController@create')->name('create.warga');
 });
 
 Route::get('/','OtentikasiController@index')->name('login');

@@ -52,6 +52,13 @@
                                     <li><a href="{{url('/dashboard')}}">Artikel</a></li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-table"></i>
+                                    <span>Data Tabel</span></a>
+                                <ul class="collapse">
+                                    <li><a href="{{ route('warga') }}">Warga</a></li>
+                                </ul>
+                            </li>
                             
                             
                         </ul>
@@ -92,7 +99,7 @@
                             <h4 class="page-title pull-left">Dashboard</h4>
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="{{url('/dashboard')}}">Home</a></li>
-                                <li><span>Dashboard</span></li>
+                                <li><span>@yield('menu')</span></li>
                             </ul>
                         </div>
                     </div>

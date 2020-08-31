@@ -39,7 +39,7 @@ class WargaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nik' => 'required|number',
+            'nik' => 'required',
             'nama' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
@@ -49,11 +49,39 @@ class WargaController extends Controller
             'desa' => 'required',
             'kecamatan' => 'required',
             'kabupaten' => 'required',
+            'provinsi' => 'required',
             'agama' => 'required',
             'pekerjaan' => 'required',
+            'status_perkawinan' => 'required',
             'status_tinggal' => 'required',
-            'blok' => 'required',
+            'blok' => 'required'
         ]);
+        
+
+        $warga = new Warga();
+
+        $warga->nik = $request->nik;
+        $warga->nama = $request->nama;
+        $warga->tempat_lahir = $request->tempat_lahir;
+        $warga->tanggal_lahir = $request->tanggal_lahir;
+        $warga->jenis_kelamin = $request->jenis_kelamin;
+        $warga->alamat_ktp = $request->alamat_ktp;
+        $warga->rt = $request->rt;
+        $warga->rw = $request->rw;
+        $warga->desa = $request->desa;
+        $warga->kecamatan = $request->kecamatan;
+        $warga->kabupaten_kota = $request->kabupaten;
+        $warga->provinsi = $request->provinsi;
+        $warga->agama = $request->agama;
+        $warga->pekerjaan = $request->pekerjaan;
+        $warga->status_nikah = $request->status_perkawinan;
+        $warga->status_tinggal = $request->status_tinggal;
+        $warga->blok = $request->blok;
+
+        $warga->save();
+
+        return redirect('warga')->with('status','Warga berhasil ditambahkan');
+
     }
 
     /**
@@ -73,9 +101,9 @@ class WargaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Warga $warga)
     {
-        
+        return view('warga.edit', compact('warga'));
     }
 
     /**
@@ -85,9 +113,52 @@ class WargaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Warga $warga)
     {
-        //
+        $request->validate([
+            'nik' => 'required',
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required',
+            'alamat_ktp' => 'required',
+            'rt' => 'required',
+            'desa' => 'required',
+            'kecamatan' => 'required',
+            'kabupaten' => 'required',
+            'provinsi' => 'required',
+            'agama' => 'required',
+            'pekerjaan' => 'required',
+            'status_perkawinan' => 'required',
+            'status_tinggal' => 'required',
+            'blok' => 'required'
+        ]);
+
+        $warga = Warga::find($warga->id);
+
+        $warga->nik = $request->nik;
+        $warga->nama = $request->nama;
+        $warga->tempat_lahir = $request->tempat_lahir;
+        $warga->tanggal_lahir = $request->tanggal_lahir;
+        $warga->jenis_kelamin = $request->jenis_kelamin;
+        $warga->alamat_ktp = $request->alamat_ktp;
+        $warga->rt = $request->rt;
+        $warga->rw = $request->rw;
+        $warga->desa = $request->desa;
+        $warga->kecamatan = $request->kecamatan;
+        $warga->kabupaten_kota = $request->kabupaten;
+        $warga->provinsi = $request->provinsi;
+        $warga->agama = $request->agama;
+        $warga->pekerjaan = $request->pekerjaan;
+        $warga->status_nikah = $request->status_perkawinan;
+        $warga->status_tinggal = $request->status_tinggal;
+        $warga->blok = $request->blok;
+
+        $warga->save();
+
+        return redirect('warga')->with('status','Data warga berhasil diupdate');
+
+        
     }
 
     /**
@@ -96,8 +167,10 @@ class WargaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Warga $warga)
     {
-        //
+        Warga::destroy($warga->id);
+
+        return redirect('warga')->with('status','Data warga berhasil dihapus');
     }
 }

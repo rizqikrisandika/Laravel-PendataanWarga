@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['admin']], function () {
+    Route::post('warga/tambah-warga','WargaController@store')->name('create.warga');
+    Route::get('warga/edit-warga/{warga}','WargaController@edit')->name('edit.warga');
+    Route::put('warga/edit-warga/{warga}','WargaController@update')->name('update.warga');
+    Route::delete('warga/{warga}','WargaController@destroy')->name('delete.warga');
+    Route::get('warga/detail/{warga}','WargaController@show')->name('detial.warga');
     Route::get('dashboard','DashboardController@index')->name('dashboard');
     Route::get('logout','OtentikasiController@logout')->name('get.logout');
     Route::get('warga','WargaController@index')->name('warga');
